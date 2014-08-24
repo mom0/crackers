@@ -21,30 +21,38 @@
 -- Other features and things to do:
 --
 --   [X] Build in word list
---   [] Custom word list param
+--   [X] Custom word list param
 --   [] Proxy requests so that IP doesn't get blocked
 --
 -- Suggest another at: https://github.com/mom0/crackers/issues
 --
 ---------------------------------------------------------------------
 
+import System.Environment
 import Crackers.Gmail
 
-data Crack = Cracked String | NotCracked deriving (Show)
+type Password = String
+
+data Crack = Cracked Password | NotCracked deriving (Show)
 
 printShow s = putStrLn $ show s
 
-findPassword :: (String -> IO (String, Bool)) -> [String] -> IO Crack
+findPassword :: (Password -> IO (Password, Bool)) -> [String] -> IO Crack
 findPassword f [] = do return (NotCracked)
 findPassword f (p:ps) = do
-    (password, works) <- f p
+  (password, works) <- f p
 
-    if works then return (Cracked password) else findPassword f ps
+  if works then return (Cracked password) else findPassword f ps
 
 main :: IO ()
 main = do
-    passwords <- readFile "data/wordlist.txt"
 
-    result <- (findPassword (gmailCredsWork "hacksmomo@gmail.com") (lines passwords))
+  args <- getArgs
 
-    printShow (result)
+  passwords <- readFile (if (length args == 1)
+    then "data/wordlist.txt"
+    else (args!!1))
+
+  result <- (findPassword (gmailCredsWork (args!!0)) (lines passwords))
+
+  printShow result

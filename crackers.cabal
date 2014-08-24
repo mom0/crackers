@@ -17,4 +17,4 @@ cabal-version:       >=1.8
 executable crackers
   main-is: crackers.hs
   -- other-modules:
-  build-depends:       base ==4.6.*, HaskellNet-SSL ==0.2.4
+  build-depends:       base ==4.6.*, HaskellNet-SSL ==0.2.4, HaskellNet == 0.3.*
