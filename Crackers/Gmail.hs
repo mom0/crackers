@@ -1,10 +1,10 @@
 module Crackers.Gmail (
-    gmailCredsWork
+    gmailCreds
 )
 
 where
 
 import Crackers.Smtp
 
-gmailCredsWork :: String -> String -> IO (String, Bool)
-gmailCredsWork = credsWork "smtp.gmail.com"
+gmailCreds :: String -> String -> IO (String, Bool)
+gmailCreds = creds "smtp.gmail.com"

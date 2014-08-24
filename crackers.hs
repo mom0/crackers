@@ -53,6 +53,6 @@ main = do
     then "data/wordlist.txt"
     else (args!!1))
 
-  result <- (findPassword (gmailCredsWork (args!!0)) (lines passwords))
+  result <- (findPassword (gmailCreds (args!!0)) (lines passwords))
 
   printShow result

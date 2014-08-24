@@ -1,6 +1,6 @@
 module Crackers.Smtp (
     smtpOk,
-    credsWork
+    creds
 )
 
 where
@@ -12,7 +12,7 @@ import Network.HaskellNet.Auth (AuthType(LOGIN))
 smtpOk :: Int -> Bool
 smtpOk = (== 235)
 
-credsWork :: String -> String -> String -> IO (String, Bool)
-credsWork host username password = doSMTPSTARTTLS host $ \c -> do
+creds :: String -> String -> String -> IO (String, Bool)
+creds host username password = doSMTPSTARTTLS host $ \c -> do
     (rsp, _) <- sendCommand c $ AUTH LOGIN username password
     if smtpOk rsp then return (password, True) else return (password, False)
