@@ -1,0 +1,30 @@
+---------------------------------------------------------------------
+-- crackers.hs
+-- By:
+--
+-- ___  ___
+-- |  \/  |
+-- | .  . | ___  _ __ ___   ___
+-- | |\/| |/ _ \| '_ ` _ \ / _ \
+-- | |  | | (_) | | | | | | (_) |
+-- \_|  |_/\___/|_| |_| |_|\___/
+--
+--
+-- Brute force website password crackers
+--
+-- Wish list:
+--
+--   [X] Gmail
+--   [] Facebook
+--   [] Twitter
+--
+-- Other features and things to do:
+--
+--   [] Build in word list
+--   [] Custom word list param
+--   [] Proxy requests so that IP doesn't get blocked
+--
+-- Suggest another at: https://github.com/mom0/crackers/issues
+--
+---------------------------------------------------------------------
+
